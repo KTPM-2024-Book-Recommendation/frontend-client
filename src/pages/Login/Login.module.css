@@ -26,6 +26,15 @@
 	max-width: 550px;
 }
 
+@media (max-width: 768px) {
+	.login-container {
+		width: 0%;
+	}
+	.login-wrapper {
+		left: 50%;
+	}
+}
+
 .login-form {
 	display: flex;
 	flex-direction: column;

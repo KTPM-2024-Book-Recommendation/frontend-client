@@ -13,36 +13,36 @@ import { setCBHeaderConfigAxios } from "./services/config/content-based-config";
 import { setCFHeaderConfigAxios } from "./services/config/collaborative-filtering-config";
 
 function App() {
-	const [loading, setLoading] = useState(true);
-	const accessToken = store.getState().auth.accessToken;
+  const [loading, setLoading] = useState(true);
+  const accessToken = store.getState().auth.accessToken;
 
-	useEffect(() => {
-		if (accessToken) {
-			setHeaderConfigAxios(accessToken);
-			setCBHeaderConfigAxios(accessToken);
-			setCFHeaderConfigAxios(accessToken);
-		}
-		setLoading(false);
-	}, [accessToken]);
+  useEffect(() => {
+    if (accessToken) {
+      setHeaderConfigAxios(accessToken);
+      setCBHeaderConfigAxios(accessToken);
+      setCFHeaderConfigAxios(accessToken);
+    }
+    setLoading(false);
+  }, [accessToken]);
 
-	if (loading) return <></>;
+  if (loading) return <></>;
 
-	return (
-		<Box>
-			<Suspense fallback={<>Loading...</>}>
-				<ThemeProvider theme={Theme}>
-					<GlobalStyle>
-						<ToastContainer
-							style={{ fontSize: "15px" }}
-							autoClose={2000}
-							draggable
-						/>
-						<RouterProvider router={router}></RouterProvider>
-					</GlobalStyle>
-				</ThemeProvider>
-			</Suspense>
-		</Box>
-	);
+  return (
+    <Box>
+      <Suspense fallback={<>Loading...</>}>
+        <ThemeProvider theme={Theme}>
+          <GlobalStyle>
+            <ToastContainer
+              style={{ fontSize: "15px" }}
+              autoClose={2000}
+              draggable
+            />
+            <RouterProvider router={router}></RouterProvider>
+          </GlobalStyle>
+        </ThemeProvider>
+      </Suspense>
+    </Box>
+  );
 }
 
 export default App;

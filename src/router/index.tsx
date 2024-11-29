@@ -15,92 +15,92 @@ import BookShelves from "../layouts/BookShelves";
 import { SignUp } from "../pages/SignUp";
 
 const LoginWrapper = () => {
-	const accessToken = useSelector((state: RootState) => state.auth.accessToken);
-	if (accessToken) {
-		return <Navigate to={"/home-page"} replace={true} />;
-	}
-	return <Login />;
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  if (accessToken) {
+    return <Navigate to={"/home-page"} replace={true} />;
+  }
+  return <Login />;
 };
 
 const SignUpWrapper = () => {
-	const accessToken = useSelector((state: RootState) => state.auth.accessToken);
-	if (accessToken) {
-		return <Navigate to={"/home-page"} replace={true} />;
-	}
-	return <SignUp />;
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  if (accessToken) {
+    return <Navigate to={"/home-page"} replace={true} />;
+  }
+  return <SignUp />;
 };
 
 const BookDetailWrapper = () => {
-	const { bookId } = useParams();
-	const [book, setBook] = useState<IBook | null>(null);
+  const { bookId } = useParams();
+  const [book, setBook] = useState<IBook | null>(null);
 
-	useEffect(() => {
-		const getBook = async () => {
-			try {
-				const response = await BookApi.getBookById(bookId || "");
-				if (response?.data) setBook(response?.data);
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		getBook();
-	}, [bookId]);
+  useEffect(() => {
+    const getBook = async () => {
+      try {
+        const response = await BookApi.getBookById(bookId || "");
+        if (response?.data) setBook(response?.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getBook();
+  }, [bookId]);
 
-	if (!book) {
-		return (
-			<Box
-				sx={{
-					position: "absolute",
-					top: "50%",
-					left: "50%",
-					transform: "translate(-50%, -50%)",
-				}}
-			>
-				<CircularProgress />
-			</Box>
-		);
-	}
+  if (!book) {
+    return (
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
-	return <BookDetail book={book} />;
+  return <BookDetail book={book} />;
 };
 
 export const router = createBrowserRouter([
-	{
-		element: <BaseTemplate />,
-		children: [
-			{
-				index: true,
-				path: "/",
-				element: <Navigate to={"/home-page"} replace={true} />,
-			},
-			{
-				path: "home-page",
-				element: <Homepage />,
-			},
-			{
-				path: "books/:bookId",
-				element: <BookDetailWrapper />,
-			},
-			{
-				path: "bookshelves",
-				element: <BookShelves />,
-			},
-			{
-				path: "about-us",
-				element: <AboutUs />,
-			},
-		],
-	},
-	{
-		path: "login",
-		element: <LoginWrapper />,
-	},
-	{
-		path: "sign-up",
-		element: <SignUpWrapper />,
-	},
-	{
-		path: "*",
-		element: <NotFound />,
-	},
+  {
+    element: <BaseTemplate />,
+    children: [
+      {
+        index: true,
+        path: "/",
+        element: <Navigate to={"/home-page"} replace={true} />,
+      },
+      {
+        path: "home-page",
+        element: <Homepage />,
+      },
+      {
+        path: "books/:bookId",
+        element: <BookDetailWrapper />,
+      },
+      {
+        path: "bookshelves",
+        element: <BookShelves />,
+      },
+      {
+        path: "about-us",
+        element: <AboutUs />,
+      },
+    ],
+  },
+  {
+    path: "login",
+    element: <LoginWrapper />,
+  },
+  {
+    path: "sign-up",
+    element: <SignUpWrapper />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);

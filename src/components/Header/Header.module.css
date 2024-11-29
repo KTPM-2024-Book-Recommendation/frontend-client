@@ -63,6 +63,7 @@
 	font-weight: 500 !important;
 	font-family: "Poppins", sans-serif !important;
 	text-align: start;
+	cursor: pointer;
 }
 .profile-pictures-wrapper {
 	position: relative !important;

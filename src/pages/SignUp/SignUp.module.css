@@ -26,6 +26,15 @@
 	max-width: 550px;
 }
 
+@media (max-width: 768px) {
+	.signup-container {
+		width: 0%;
+	}
+	.signup-wrapper {
+		left: 50%;
+	}
+}
+
 .signup-form {
 	display: flex;
 	flex-direction: column;
